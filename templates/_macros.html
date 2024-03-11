@@ -1,19 +1,26 @@
-{%macro datos(name, placeholder, type='text') %}
-
-<p><input type="{{type}}" name="{{name}}" placeholder="{{placeholder}}"></p>
-
-{%endmacro %}
-
-
-{% macro forms(field) %}
-
-<td>{{field.label}}</td>
-<dd>{{field(**kwargs)| safe}}</dd>
-{%if field.errors%}
+{% macro macros(name,placeholder,type="number") %}
+    <div class="control-group">
+        <label for="{{name}}" class="control-label">{{placeholder}}</label>
+        <div class="controls">
+            <input type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" value="">
+        </div>
+    </div>
+{%endmacro%}
+{% macro input(field) %}
+    <div class="control-group">
+        <div class="controls">
+            {{field.label}}
+            {{field(**kwargs)|safe}}
+        </div>
+    </div>
+    {%if field.errors%}
     <ul>
         {%for error in field.errors%}
-            <li style="color: red">{{error}}</li>
+        <li style="color: red">
+            {{error}}
+        </li>
         {%endfor%}
     </ul>
-{%endif%}
-{%endmacro %}
+    {%endif%}
+
+{%endmacro%}

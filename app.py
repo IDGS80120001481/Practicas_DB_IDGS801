@@ -3,18 +3,30 @@ import forms
 from Pizza import Pizza
 from config import DevelopmentConfig
 from flask_wtf.csrf import CSRFProtect
-from PizzeriaModel import db
-from PizzeriaModel import Pizzeria
 
+from models import db
+from models import Pizzeria, Empleado
 import EmpleadosForms
-from EmpleadoModel import db
-from EmpleadoModel import Empleado
 
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
 csrf = CSRFProtect()
 
 pizzas = []
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'),404
+ 
+@app.before_request
+def before_request():
+    print("before 1")
+   
+@app.after_request
+def after_request(response):
+    print("after 3")
+    return response
+
 @app.route("/", methods=["GET","POST"])
 def add_list(): 
     form = forms.PizzeriaForm(request.form)
