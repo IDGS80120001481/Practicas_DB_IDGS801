@@ -1,0 +1,39 @@
+{% extends "layout2.html" %}
+{%block content%}
+    {%from "_macros.html" import input %}
+    <div class="container">
+        <div class="row">
+            <form name="sent" action="/add" id="form1" method="post">
+                
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 float-label-form-group controls">
+                        {{input(form.nombre,class="form-control")}}
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 float-label-form-group controls">
+                        {{input(form.direccion,class="form-control")}}
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 float-label-form-group controls">
+                        {{input(form.telefono,class="form-control")}}
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 float-label-form-group controls">
+                        {{input(form.correo,class="form-control")}}
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 float-label-form-group controls">
+                        {{input(form.sueldo,class="form-control")}}
+                    </div>
+                </div>
+                <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+                <input type="submit" id="reg_alum" name="registrar" value="Resgistrar"/>
+            </form>
+        </div>
+    </div>
+        
+{%endblock%}
